@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import cart from '../modules/cart'
-import products from '../modules/products'
+import init from '../modules/init'
 import collect from '../modules/collect'
 import user from '../modules/user'
 // import createLogger from '../../../src/plugins/logger'
@@ -14,7 +14,7 @@ export default new Vuex.Store({
   modules: {
     user,
     cart,
-    products,
+    init,
     collect
   },
   strict: debug

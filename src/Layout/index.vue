@@ -38,7 +38,7 @@
                     <router-link :key='index' :to='item.path'>{{item.name}}</router-link>
                 </BreadcrumbItem>
                 <template>
-                    <a :style="{textAlign: 'center'}" @click="modal12 = true">{{current.department_name}}...</a>
+                    <a :style="{textAlign: 'center'}" @click="modal12 = true">...</a>
                     <Modal v-model="modal12" draggable scrollable title="Modal 1">
                         <template>
                             <Tree multiple :data="data2" show-checkbox></Tree>
@@ -49,11 +49,11 @@
                     <div>
                     <Icon type="md-person" />
                     <span href="javascript:void(0)">
-                        {{current.name}}
+                        guest
                     </span>
                     </div>
                     <DropdownMenu slot="list">
-                        <DropdownItem>退出登录</DropdownItem>
+                        <DropdownItem><a @click="RouterCheck"><span>退出登录</span></a></DropdownItem>
                     </DropdownMenu>
                 </Dropdown>
             </Header>
@@ -61,7 +61,7 @@
                 <Breadcrumb :style="{margin: '16px 0'}">
                 </Breadcrumb>
                 <Card>
-                    <div style="height: calc(100vh - 135px)">
+                    <div style="height:100%">
                         <router-view/>
                     </div>
                 </Card>
@@ -85,7 +85,8 @@ export default {
     }
   },
   created: function () {
-    this.$store.dispatch('products/getAllProducts')
+    const router = this.$router
+    this.$store.dispatch('init/getInits', router)
     this.getBread()
   },
   methods: {
@@ -95,12 +96,15 @@ export default {
     getBread () {
       console.log(this.$route.matched, 8899)
       this.breadlist = this.$route.matched
+    },
+    RouterCheck () {
+      this.$router.push('/login')
     }
   },
   computed: {
     ...mapState({
-      menuList: state => state.products.menuList,
-      current: state => state.products.current
+      menuList: state => state.init.menuList,
+      current: state => state.init.current
     })
   },
   watch: {

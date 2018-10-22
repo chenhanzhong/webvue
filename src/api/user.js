@@ -1,26 +1,26 @@
 import axios from 'axios'
+import {Encrypt} from '../utils/aes'
 
 export default {
   postUser (cb, options) {
-    console.log(options, 88)
+    const paramData = {
+      name: Encrypt(options.name),
+      pwd: Encrypt(options.pwd)
+    }
+    let data = new FormData()
+    data.append('name', paramData.name)
+    data.append('pwd', paramData.pwd)
     axios({
       method: 'post',
       url: 'http://chenhanzhong.com:7000/users/create',
       headers: {
-        'Content-type': 'application/x-www-form-urlencoded'
+        'Content-type': 'multipart/form-data'
       },
-      data: options,
-      transformRequest: [function (data) {
-        let ret = ''
-        for (let it in data) {
-          ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-        }
-        return ret
-      }]
+      data
     })
       .then(res => {
         if (res && res.data) {
-          cb(res.data)
+          cb(paramData)
         } else {
           this.$Message.error('登陆失败')
           console.log('登陆失败')

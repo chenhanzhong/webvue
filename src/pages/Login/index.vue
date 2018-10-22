@@ -59,7 +59,9 @@ export default {
     handleSubmit (name) {
       this.$refs[name].validate(valid => {
         if (valid) {
-          this.$store.dispatch('user/getAuth', {name: this.formInline.user, pwd: this.formInline.password})
+          const router = this.$router
+          // console.log(router, 777)
+          this.$store.dispatch('user/getAuth', {data: {name: this.formInline.user, pwd: this.formInline.password}, router})
         } else {
           this.$Message.error('Fail!')
         }

@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Home from '@/Home/index'
-import Collect from '@/Collect/index'
+import Home from '@/Home/index'
+import Tabel from '@/pages/Tabels/index'
 import Login from '@/pages/Login/index'
 import iView from 'iview'// 导入组件库
 import Layout from '@/Layout/index'
+import Echarts from '@/pages/Echart/index'
+
 import 'iview/dist/styles/iview.css'// 导入样式
 
 Vue.use(Router)
@@ -19,14 +21,19 @@ export default new Router({
       component: Layout,
       children: [
         {
-          path: '/collect',
+          path: '/',
           name: '汇总概览',
-          component: Collect
+          component: Home
         },
         {
-          path: '/report',
+          path: '/tabel',
+          name: '表格',
+          component: Tabel
+        },
+        {
+          path: '/echarts',
           name: '出勤明细',
-          component: Collect
+          component: Echarts
         }
       ]
     },

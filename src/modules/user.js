@@ -12,14 +12,18 @@ const getters = {}
 // actions
 const actions = {
   getAuth ({commit}, options) {
-    user.postUser((data) => commit('setUser', data), options)
+    user.postUser((data) => commit('setUser', {data, router: options.router}), {...options.data})
   }
 }
 
 // mutations
 const mutations = {
-  setCurrent (state, data) {
+  setUser (state, options) {
+    // console.log(router, 77777)
+    const { router, data } = options
+    localStorage.setItem('users', data)
     state.user = data
+    router.push('/')
   }
 }
 

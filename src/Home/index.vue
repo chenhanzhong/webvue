@@ -1,15 +1,7 @@
 <template>
     <Card style="width:350px">
-        <p slot="title">
-            <Icon type="ios-film-outline"></Icon>
-            Classic film
-        </p>
-        <a href="#" slot="extra" @click.prevent="changeLimit">
-            <Icon type="ios-loop-strong"></Icon>
-            Change
-        </a>
         <ul>
-            <li :key='item' v-for="item in randomMovieList">
+            <li :key='index' v-for="(item, index) in movieList">
                 <a :href="item.url" target="_blank">{{ item.name }}</a>
                 <span>
                     <Icon type="ios-star" v-for="n in 4" :key="n"></Icon><Icon type="ios-star" v-if="item.rate >= 9.5"></Icon><Icon type="ios-star-half" v-else></Icon>
@@ -77,31 +69,6 @@ export default {
       ],
       randomMovieList: []
     }
-  },
-  methods: {
-    changeLimit () {
-      function getArrayItems (arr, num) {
-        const tempAarray = []
-        for (let index in arr) {
-          tempAarray.push(arr[index])
-        }
-        const returnAarray = []
-        for (let i = 0; i < num; i++) {
-          if (tempAarray.length > 0) {
-            const arrIndex = Math.floor(Math.random() * tempAarray.length)
-            returnAarray[i] = tempAarray[arrIndex]
-            tempAarray.splice(arrIndex, 1)
-          } else {
-            break
-          }
-        }
-        return returnAarray
-      }
-      this.randomMovieList = getArrayItems(this.movieList, 5)
-    }
-  },
-  mounted () {
-    this.changeLimit()
   }
 }
 </script>
