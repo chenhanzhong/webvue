@@ -21,7 +21,8 @@ const actions = {
 // mutations
 const mutations = {
   setList (state, data) {
-    state.list = data
+    console.log(data, 888)
+    state.list = data.projects
     state.loading = false
   },
   setInit (state) {
