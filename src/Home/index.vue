@@ -1,74 +1,62 @@
 <template>
-    <Card style="width:350px">
-        <ul>
-            <li :key='index' v-for="(item, index) in movieList">
-                <a :href="item.url" target="_blank">{{ item.name }}</a>
+    <div>
+      <Card style="width: 100%">
+        <div>
+          <h2 style="margin-bottom: 20px;">Good Day!</h2>
+          <span>web前端 |－某某某事业群－某某平台部－某某技术部</span>
+        </div>
+      </Card>
+      <div>
+        <Card style="width:320px;display: inline-block">
+          <div style="text-align:center;display: inline-block">
+              <div style="width: 90px"><img style="width: 100%" src="../assets/logo.png"></div>
+              <span>活跃统计</span>
+              <span>33000</span>
+          </div>
+        </Card>
+        <Card style="width:320px;display: inline-block">
+          <div style="text-align:center;display: inline-block">
+              <div>
+                <div style="width: 90px;float: left"><img style="width: 100%" src="../assets/logo.png"></div>
                 <span>
-                    <Icon type="ios-star" v-for="n in 4" :key="n"></Icon><Icon type="ios-star" v-if="item.rate >= 9.5"></Icon><Icon type="ios-star-half" v-else></Icon>
-                    {{ item.rate }}
+                  <span>活跃统计</span>
+                  <span>33000</span>
                 </span>
-            </li>
-        </ul>
-    </Card>
+              </div>
+          </div>
+        </Card>
+      </div>
+      <Card style="width:320px;display: inline-block">
+          <div style="text-align:center;display: inline-block">
+              <img src="../assets/logo.png">
+              <h3>A high quality UI Toolkit based on Vue.js</h3>
+          </div>
+      </Card>
+      <Card style="width:320px;display: inline-block">
+          <div style="text-align:center;">
+              <h3 style="margin-bottom: 30px">Ongoing project</h3>
+              <template>
+                <div style="display: flex;justify-content: space-between">
+                  <div>
+                    <i-circle :percent="80">
+                      <span class="demo-Circle-inner" style="font-size:24px">react</span>
+                    </i-circle>
+                  </div>
+                  <div>
+                    <i-circle :percent="70">
+                      <span class="demo-Circle-inner" style="font-size:24px">vue</span>
+                    </i-circle>
+                  </div>
+                </div>
+              </template>
+          </div>
+      </Card>
+    </div>
 </template>
 <script>
 export default {
   data () {
-    return {
-      movieList: [
-        {
-          name: 'The Shawshank Redemption',
-          url: 'https://movie.douban.com/subject/1292052/',
-          rate: 9.6
-        },
-        {
-          name: 'Leon:The Professional',
-          url: 'https://movie.douban.com/subject/1295644/',
-          rate: 9.4
-        },
-        {
-          name: 'Farewell to My Concubine',
-          url: 'https://movie.douban.com/subject/1291546/',
-          rate: 9.5
-        },
-        {
-          name: 'Forrest Gump',
-          url: 'https://movie.douban.com/subject/1292720/',
-          rate: 9.4
-        },
-        {
-          name: 'Life Is Beautiful',
-          url: 'https://movie.douban.com/subject/1292063/',
-          rate: 9.5
-        },
-        {
-          name: 'Spirited Away',
-          url: 'https://movie.douban.com/subject/1291561/',
-          rate: 9.2
-        },
-        {
-          name: 'Schindler\'s List',
-          url: 'https://movie.douban.com/subject/1295124/',
-          rate: 9.4
-        },
-        {
-          name: 'The Legend of 1900',
-          url: 'https://movie.douban.com/subject/1292001/',
-          rate: 9.2
-        },
-        {
-          name: 'WALL·E',
-          url: 'https://movie.douban.com/subject/2131459/',
-          rate: 9.3
-        },
-        {
-          name: 'Inception',
-          url: 'https://movie.douban.com/subject/3541415/',
-          rate: 9.2
-        }
-      ],
-      randomMovieList: []
-    }
+    return {}
   }
 }
 </script>

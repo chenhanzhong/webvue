@@ -22,7 +22,7 @@ export default new Router({
       children: [
         {
           path: '/',
-          name: '汇总概览',
+          // name: 'Home',
           component: Home
         },
         {

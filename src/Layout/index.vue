@@ -35,27 +35,31 @@
         <Layout :style="{marginLeft: '200px'}">
             <Header :style="{background: '#fff', boxShadow: '0 2px 3px 2px rgba(0,0,0,.1)'}">
                 <BreadcrumbItem v-for='(item, index) in breadlist' :key='index'>
-                    <router-link :key='index' :to='item.path'>{{item.name}}</router-link>
+                    <router-link :key='index' :to="item.path===''?'/':item.path"><span :style="{color: '#999'}">{{item.name}}</span></router-link>
                 </BreadcrumbItem>
                 <template>
-                    <a :style="{textAlign: 'center'}" @click="modal12 = true">...</a>
+                    <a :style="{textAlign: 'center', marginLeft: '100px'}" @click="modal12 = true">...</a>
                     <Modal v-model="modal12" draggable scrollable title="Modal 1">
                         <template>
                             <Tree multiple :data="data2" show-checkbox></Tree>
                         </template>
                     </Modal>
                 </template>
-                <Dropdown :style="{float: 'right', cursor: 'pointer'}">
-                    <div>
-                    <Icon type="md-person" />
-                    <span href="javascript:void(0)">
-                        guest
-                    </span>
+                <template>
+                    <div :style="{float: 'right', cursor: 'pointer'}">
+                        <Dropdown :style="{lineHeight: 0}">
+                            <span>
+                                <Icon type="md-person" />
+                                <span href="javascript:void(0)">
+                                    guest
+                                </span>
+                            </span>
+                            <DropdownMenu slot="list">
+                                <DropdownItem><a @click="RouterCheck"><span>退出登录</span></a></DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
                     </div>
-                    <DropdownMenu slot="list">
-                        <DropdownItem><a @click="RouterCheck"><span>退出登录</span></a></DropdownItem>
-                    </DropdownMenu>
-                </Dropdown>
+                </template>
             </Header>
             <Content :style="{padding: '0 16px 16px'}">
                 <Breadcrumb :style="{margin: '16px 0'}">
@@ -80,7 +84,7 @@ export default {
       breadlist: [],
       modal12: false,
       data2: [
-        {title: 'xong', expan: true, children: []}
+        {title: 'aaa', expan: true, children: [{title: 'bbb'}]}
       ]
     }
   },

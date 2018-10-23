@@ -10,19 +10,20 @@ const state = {
 const getters = {}
 // actions
 const actions = {
-  getList ({ commit }) {
+  getList ({ commit }, {current}) {
     commit('setInit')
+    // console.log(current, 888)
     collect.getList(data => {
-      commit('setList', data)
+      commit('setList', {data, current})
     })
   }
 }
 
 // mutations
 const mutations = {
-  setList (state, data) {
-    console.log(data, 888)
-    state.list = data.projects
+  setList (state, {data, current}) {
+    console.log(data, current, 888)
+    state.list = data.projects.slice((current - 1) * 10, current * 10)
     state.loading = false
   },
   setInit (state) {
