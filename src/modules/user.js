@@ -12,7 +12,9 @@ const getters = {}
 // actions
 const actions = {
   getAuth ({commit}, options) {
-    user.postUser((data) => commit('setUser', {data, router: options.router}), {...options.data})
+    user.postUser((user) => {
+      commit('setUser', {user, ...options})
+    }, {...options.data})
   }
 }
 
@@ -20,9 +22,10 @@ const actions = {
 const mutations = {
   setUser (state, options) {
     // console.log(router, 77777)
-    const { router, data } = options
-    localStorage.setItem('users', data)
-    state.user = data
+    const { router, user, message } = options
+    localStorage.setItem('users', JSON.stringify(user))
+    message.success('登录成功')
+    state.user = user
     router.push('/')
   }
 }

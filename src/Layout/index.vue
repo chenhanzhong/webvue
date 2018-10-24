@@ -89,8 +89,9 @@ export default {
     }
   },
   created: function () {
-    const router = this.$router
-    this.$store.dispatch('init/getInits', router)
+    // const router = this.$router
+    // const message = this.$Message
+    // this.$store.dispatch('init/getInits', {router, message})
     this.getBread()
   },
   methods: {
@@ -98,7 +99,7 @@ export default {
       'addProductToCart'
     ]),
     getBread () {
-      console.log(this.$route.matched, 8899)
+    //   console.log(this.$route.matched, 8899)
       this.breadlist = this.$route.matched
     },
     RouterCheck () {

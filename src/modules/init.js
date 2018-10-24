@@ -1,7 +1,4 @@
-import auth from '../api/auth'
-// import config from '../config'
-// import shop from '../api'
-
+// import user from '../api/user'
 // initial state
 const state = {
   all: [],
@@ -16,40 +13,24 @@ const state = {
 const getters = {}
 // actions
 const actions = {
-  getInits ({ commit }, router) {
+  getInits ({ commit }, options) {
     const storage = localStorage.getItem('users')
-    const getInit = () => {
-      // shop.getCurrent(data => {
-      //   commit('setCurrent', data)
-      // })
-      // shop.getConfig(data => {
-      //   commit('setConfig', data)
-      // })
-      // shop.getMenus(data => {
-      //   commit('setMenuList', data)
-      // })
-    }
+    const { router, message } = options
     if (!storage) {
-      const hasCode = location.href.match(/\?code=(.*)/)
-      if (hasCode) {
-        auth.getToken(token => {
-          commit('setToken', token)
-          getInit()
-        })
-      } else {
-        router.push('/login')
-      }
+      router.push('/login')
     } else {
-      getInit()
+      // user.postUser((data) => commit('setToken', {data, message}), {...JSON.parse(storage)})
+      commit('setToken', message)
     }
   }
 }
 
 // mutations
 const mutations = {
-  setToken (state, token) {
-    localStorage.setItem('AuthToken', `${token.token_type} ${token.access_token}`)
-    state.token = token
+  setToken (state, message) {
+    // localStorage.setItem('users', options.data)
+    // router.push('/')
+    message.success('欢迎回来')
   },
   setCurrent (state, data) {
     if (data) {

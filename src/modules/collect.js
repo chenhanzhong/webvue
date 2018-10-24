@@ -22,7 +22,7 @@ const actions = {
 // mutations
 const mutations = {
   setList (state, {data, current}) {
-    console.log(data, current, 888)
+    // console.log(data, current, 888)
     state.list = data.projects.slice((current - 1) * 10, current * 10)
     state.loading = false
   },

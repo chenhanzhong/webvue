@@ -11,7 +11,7 @@
           <div style="text-align:center;display: inline-block">
               <div style="width: 90px"><img style="width: 100%" src="../assets/logo.png"></div>
               <span>活跃统计</span>
-              <span>33000</span>
+              <span>{{num1}}</span>
           </div>
         </Card>
         <Card style="width:320px;display: inline-block">
@@ -20,30 +20,24 @@
                 <div style="width: 90px;float: left"><img style="width: 100%" src="../assets/logo.png"></div>
                 <span>
                   <span>活跃统计</span>
-                  <span>33000</span>
+                  <span>{{num2}}</span>
                 </span>
               </div>
           </div>
         </Card>
       </div>
       <Card style="width:320px;display: inline-block">
-          <div style="text-align:center;display: inline-block">
-              <img src="../assets/logo.png">
-              <h3>A high quality UI Toolkit based on Vue.js</h3>
-          </div>
-      </Card>
-      <Card style="width:320px;display: inline-block">
           <div style="text-align:center;">
               <h3 style="margin-bottom: 30px">Ongoing project</h3>
               <template>
                 <div style="display: flex;justify-content: space-between">
                   <div>
-                    <i-circle :percent="80">
+                    <i-circle :percent="percent1">
                       <span class="demo-Circle-inner" style="font-size:24px">react</span>
                     </i-circle>
                   </div>
                   <div>
-                    <i-circle :percent="70">
+                    <i-circle :percent="percent2">
                       <span class="demo-Circle-inner" style="font-size:24px">vue</span>
                     </i-circle>
                   </div>
@@ -56,7 +50,37 @@
 <script>
 export default {
   data () {
-    return {}
+    return {
+      percent1: 0,
+      percent2: 0,
+      num1: 0,
+      num2: 0
+    }
+  },
+  mounted () {
+    this.Increase()
+    this.numAdd(2000, 'num1')
+    this.numAdd(1500, 'num2')
+  },
+  methods: {
+    Increase () {
+      setTimeout(() => {
+        this.percent1 = 80
+        this.percent2 = 70
+      }, 50)
+    },
+    numAdd (n1, n2) {
+      let num = 0
+      let timer = setInterval(() => {
+        num += 20
+        if (num > n1) {
+          num = n1
+          this[n2] = n1
+          clearInterval(timer)
+        }
+        this[n2] = num
+      }, 20)
+    }
   }
 }
 </script>

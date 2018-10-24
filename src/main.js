@@ -9,14 +9,28 @@ import router from './router'
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 /* eslint-disable no-new */
+router.beforeEach((to, from, next) => {
+  const data = localStorage.getItem('user')
+  if (!data) {
+    next()
+  } else {
+    if (to.path === '/login') {
+      next()
+    } else {
+      next('/login')
+    }
+  }
+})
 // router.beforeEach((to, from, next) => {
-//   const data = localStorage.getItem('user')
-//   console.log(!data, to.path, 888)
-//   if (!data && to.path !== '/login') {
+//   if (localStorage.getItem('uers')) {
+//     next()
+//   } else {
 //     next({path: '/login'})
 //   }
+//   if (to.fullPath === '/login') {
+//     next({path: from.path})
+//   }
 // })
-
 new Vue({
   el: '#app',
   store,

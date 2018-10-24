@@ -6,18 +6,20 @@ import Login from '@/pages/Login/index'
 import iView from 'iview'// 导入组件库
 import Layout from '@/Layout/index'
 import Echarts from '@/pages/Echart/index'
+import VueParticles from 'vue-particles'
 
 import 'iview/dist/styles/iview.css'// 导入样式
 
 Vue.use(Router)
 Vue.use(iView)
+Vue.use(VueParticles)
 
 export default new Router({
   mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Home',
+      // name: 'Home',
       component: Layout,
       children: [
         {
