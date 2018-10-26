@@ -14,19 +14,19 @@
 <template>
     <div class="layout">
         <Sider :style="{position: 'fixed', height: '100vh', left: 0, overflow: 'auto'}">
-            <Menu active-name="1-1" theme="dark" width="auto" :open-names="['1']">
+            <Menu :active-name="routePath" theme="dark" width="auto" :open-names="['/etable']" accordion>
                 <template v-for="(menu, index) in menuList" v-if='!menu.children'>
-                    <MenuItem :name='index' :key='index' :to="menu.web_route">
+                    <MenuItem :name='menu.web_route' :key='index' :to="menu.web_route">
                         <Icon :key='index' type="ios-navigate"></Icon>
                         {{menu.name}}
                     </MenuItem>
                 </template>
-                <Submenu :name='index' :key='index' v-else>
+                <Submenu :name='menu.web_route' :key='index' v-else>
                     <template slot="title">
                         <Icon type="ios-navigate"></Icon>
                         {{menu.name}}
                     </template>
-                    <MenuItem :name="index-itemMenu.id" :key='itemMenu.id' v-for="itemMenu in menu.children" :to="itemMenu.web_route">
+                    <MenuItem :name="itemMenu.web_route" :key='itemMenu.id' v-for="itemMenu in menu.children" :to="itemMenu.web_route">
                         {{itemMenu.name}}
                     </MenuItem>
                 </Submenu>
@@ -99,7 +99,8 @@ export default {
       'addProductToCart'
     ]),
     getBread () {
-    //   console.log(this.$route.matched, 8899)
+      console.log(this.$route, 8899)
+      this.routePath = this.$route.path
       this.breadlist = this.$route.matched
     },
     RouterCheck () {
