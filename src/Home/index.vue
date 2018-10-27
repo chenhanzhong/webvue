@@ -6,7 +6,7 @@
           <span>web前端 |－某某某事业群－某某平台部－某某技术部</span>
         </div>
       </Card>
-      <div>
+      <div style="margin:20px auto;text-align:center">
         <Card style="width:320px;display: inline-block">
           <div style="text-align:center;display: inline-block">
               <div style="width: 90px"><img style="width: 100%" src="../assets/logo.png"></div>
@@ -17,7 +17,7 @@
         <Card style="width:320px;display: inline-block">
           <div style="text-align:center;display: inline-block">
               <div>
-                <div style="width: 90px;float: left"><img style="width: 100%" src="../assets/logo.png"></div>
+                <div style="width: 90px"><img style="width: 100%" src="../assets/logo.png"></div>
                 <span>
                   <span>活跃统计</span>
                   <span>{{num2}}</span>
@@ -26,7 +26,7 @@
           </div>
         </Card>
       </div>
-      <Card style="width:320px;display: inline-block">
+      <Card style="width:320px;margin:20px auto;">
           <div style="text-align:center;">
               <h3 style="margin-bottom: 30px">Ongoing project</h3>
               <template>
@@ -44,6 +44,17 @@
                 </div>
               </template>
           </div>
+      </Card>
+      <Card>
+        <Upload
+          multiple
+          type="drag"
+          action="//jsonplaceholder.typicode.com/posts/">
+          <div style="padding: 20px 0">
+              <Icon type="ios-cloud-upload" size="52" style="color: #3399ff"></Icon>
+              <p>upload file</p>
+          </div>
+        </Upload>
       </Card>
     </div>
 </template>
