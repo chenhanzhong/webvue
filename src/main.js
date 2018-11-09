@@ -10,8 +10,9 @@ Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 /* eslint-disable no-new */
 router.beforeEach((to, from, next) => {
-  const data = localStorage.getItem('user')
-  if (!data) {
+  const data = localStorage.getItem('users')
+  console.log(data, 888)
+  if (data) {
     next()
   } else {
     if (to.path === '/login') {

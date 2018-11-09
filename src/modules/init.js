@@ -2,7 +2,7 @@
 // initial state
 const state = {
   all: [],
-  menuList: [{name: '首页', web_route: '/'}, {name: '图表', web_route: '/echarts'}, {name: 'Demo', web_route: '/etable', children: [{name: '表格', web_route: '/tabel'}, {name: '窗口分割', web_route: '/split'}]}],
+  menuList: [{name: '首页', web_route: '/'}, {name: '图表', web_route: '/echarts'}, {name: 'Demo', web_route: '/etable', children: [{name: '表格', web_route: '/tabel'}]}],
   token: '',
   router: [],
   current: {},
