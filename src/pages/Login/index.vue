@@ -27,20 +27,48 @@
       >
       </vue-particles>
     </div>
-    <div  class="form">
+    <div  class="form" v-show="showLogin">
       <Form ref="formInline" :model="formInline" :rules="ruleInline">
-      <FormItem prop="user">
+      <FormItem label="用户名" prop="user">
         <Input type="text" v-model="formInline.user" placeholder="Username">
           <Icon type="ios-person-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
-      <FormItem prop="password">
+      <FormItem label="密码" prop="password">
         <Input type="password" v-model="formInline.password" placeholder="Password">
           <Icon type="ios-lock-outline" slot="prepend"></Icon>
         </Input>
       </FormItem>
       <FormItem>
-          <Button type="primary" @click="handleSubmit('formInline')">Sign In</Button>
+          <Button type="primary" @click="handleSubmit('formInline')">登陆</Button>
+          <div>
+            <span @click="handleLogin(false)">没有账号？马上注册</span>
+          </div>
+      </FormItem>
+      </Form>
+    </div>
+    <div  class="form" v-show="!showLogin">
+      <Form ref="formSign" :model="formInline" :rules="ruleInline">
+      <FormItem label="用户名" prop="user">
+        <Input type="text" v-model="formInline.user" placeholder="Username">
+          <Icon type="ios-person-outline" slot="prepend"></Icon>
+        </Input>
+      </FormItem>
+      <FormItem label="密码" prop="password">
+        <Input type="password" v-model="formInline.password" placeholder="Password">
+          <Icon type="ios-lock-outline" slot="prepend"></Icon>
+        </Input>
+      </FormItem>
+      <FormItem label="确认密码" prop="passwordCheck">
+        <Input type="password" v-model="formInline.passwordCheck" placeholder="confirm">
+          <Icon type="ios-lock-outline" slot="prepend"></Icon>
+        </Input>
+      </FormItem>
+      <FormItem>
+          <Button type="primary" @click="handleSubmit('formSign')">注册</Button>
+          <div>
+            <span @click="handleLogin(true)">已有账号？马上登陆</span>
+          </div>
       </FormItem>
       </Form>
     </div>
@@ -49,10 +77,21 @@
 <script>
 export default {
   data () {
+    const validatePassCheck = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('Please enter your password again'))
+      } else if (value !== this.formInline.password) {
+        callback(new Error('The two input passwords do not match!'))
+      } else {
+        callback()
+      }
+    }
     return {
+      showLogin: true,
       formInline: {
         user: '',
-        password: ''
+        password: '',
+        passwordCheck: ''
       },
       ruleInline: {
         user: [
@@ -74,6 +113,12 @@ export default {
             message: 'The password length cannot be less than 6 bits',
             trigger: 'blur'
           }
+        ],
+        passwordCheck: [
+          {
+            validator: validatePassCheck,
+            trigger: 'blur'
+          }
         ]
       }
     }
@@ -81,15 +126,19 @@ export default {
   methods: {
     handleSubmit (name) {
       this.$refs[name].validate(valid => {
+        // console.log(this, 777)
         if (valid) {
           const router = this.$router
           const message = this.$Message
-          // console.log(router, 777)
-          this.$store.dispatch('user/getAuth', {data: {name: this.formInline.user, pwd: this.formInline.password}, router, message})
+          const url = name === 'formSign' ? 'sign' : 'login'
+          this.$store.dispatch('user/getUser', {data: {name: this.formInline.user, pwd: this.formInline.password}, url, router, message})
         } else {
-          this.$Message.error('Fail!')
+          this.$Message.error('请求失败!')
         }
       })
+    },
+    handleLogin (status) {
+      this.showLogin = !!status
     }
   }
 }

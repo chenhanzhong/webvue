@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/Home/index'
-import Tabel from '@/pages/Tabels/index'
 import Login from '@/pages/Login/index'
-import iView from 'iview'// 导入组件库
+import Home from '@/Home/index'
 import Layout from '@/Layout/index'
+import Tabel from '@/pages/Tabels/index'
+import Form from '@/pages/Form/index'
 import Echarts from '@/pages/Echart/index'
+import Split from '@/pages/Split/index'
+import iView from 'iview'// 导入组件库
 // import Split from '@/pages/Split/index'
 import VueParticles from 'vue-particles'
 
@@ -35,10 +37,20 @@ export default new Router({
         },
         {
           path: '/echarts',
-          name: '出勤明细',
+          name: '图表',
           component: Echarts
+        },
+        {
+          path: '/form',
+          name: '信息编辑',
+          component: Form
         }
       ]
+    },
+    {
+      path: '/split',
+      name: '文档',
+      component: Split
     },
     {
       path: '/login',

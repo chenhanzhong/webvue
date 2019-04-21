@@ -1,32 +1,49 @@
 import axios from 'axios'
+import { Message } from 'iview'
 import {Encrypt} from '../utils/aes'
+import config from '../config'
 
 export default {
-  postUser (cb, options) {
-    const paramData = {
-      name: Encrypt(options.name),
-      pwd: Encrypt(options.pwd)
-    }
-    let data = new FormData()
-    data.append('name', paramData.name)
-    data.append('pwd', paramData.pwd)
+  postUser (cb, {url, data}) {
+    let formData = new FormData()
+    formData.append('name', Encrypt(data.name))
+    formData.append('pwd', Encrypt(data.pwd))
     axios({
       method: 'post',
-      url: 'http://chenhanzhong.com:7000/users/create',
+      url: `${config.api}/api/${url}`,
       headers: {
         'Content-type': 'multipart/form-data'
       },
-      data
+      data: formData
     })
       .then(res => {
-        if (res && res.data) {
-          cb(paramData)
+        if (res.data.success || res.data.code === '200') {
+          cb(res.data.token)
         } else {
-          this.$Message.error('登陆失败')
-          console.log('登陆失败')
+          Message.error(res.data.message)
         }
       }).catch((e) => {
-        console.log(e)
+        Message.error(e.message)
       })
+  },
+  getAuth (cb, token) {
+    let formData = new FormData()
+    formData.append('token', token)
+    axios({
+      method: 'post',
+      url: `${config.api}/api/auth`,
+      headers: {
+        'Content-type': 'multipart/form-data'
+      },
+      data: formData
+    }).then(res => {
+      if (res.data.success || res.data.code === '200') {
+        cb(res.data.data)
+      } else {
+        Message.error(res.data.message)
+      }
+    }).catch((e) => {
+      Message.error(e.message)
+    })
   }
 }

@@ -3,6 +3,8 @@
       <Card style="width: 100%">
         <div>
           <h2 style="margin-bottom: 20px;">Good Day!</h2>
+          <Avatar src="https://i.loli.net/2017/08/21/599a521472424.jpg" />
+          <span>陈汉中</span>
           <span>web前端 |－某某某事业群－某某平台部－某某技术部</span>
         </div>
       </Card>

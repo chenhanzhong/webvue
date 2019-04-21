@@ -4,28 +4,38 @@ import user from '../api/user'
 
 // initial state
 const state = {
-  users: []
+  // users: []
+  token: '',
+  data: {}
 }
 
 // getters
 const getters = {}
 // actions
 const actions = {
-  getAuth ({commit}, options) {
-    user.postUser((user) => {
-      commit('setUser', {user, ...options})
-    }, {...options.data})
+  getUser ({commit}, options) {
+    const {url, data} = options
+    user.postUser((token) => {
+      commit('setUser', token)
+      console.log(111122)
+      user.getAuth((res) => {
+        commit('setAuth', {res, options})
+      }, token)
+    }, {url, data})
   }
 }
 
 // mutations
 const mutations = {
-  setUser (state, options) {
-    // console.log(router, 77777)
-    const { router, user, message } = options
-    localStorage.setItem('users', JSON.stringify(user))
+  setUser (state, token) {
+    localStorage.setItem('token', JSON.stringify(token))
+    state.token = token
+  },
+  setAuth (state, {res, options}) {
+    // console.log(token, state, 80, options, 77777)
+    const { router, message } = options
     message.success('登录成功')
-    state.user = user
+    state.data = res
     router.push('/')
   }
 }

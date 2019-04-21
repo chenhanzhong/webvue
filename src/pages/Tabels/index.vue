@@ -137,7 +137,7 @@ export default {
     show (index) {
       this.$Modal.info({
         title: 'User Info',
-        content: `Title：${this.list[index].title}<br>Number：${this.list[index].number}<br>Address：${this.list[index].address}`
+        content: `Title：${this.list[index].name}<br>Number：${this.list[index].number}<br>Address：${this.list[index].address}`
       })
     },
     remove (index) {
